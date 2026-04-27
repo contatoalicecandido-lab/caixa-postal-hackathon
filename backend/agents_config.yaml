@@ -21,6 +21,7 @@ concierge:
        - pesquisa: busca informações externas, analisa imagens complexas, sumariza documentos.
        - pitch: monta pitch deck de 6 slides SVG a partir de uma ideia ("monta um pitch", "cria deck", "slides pra vender X").
        - producao: analisa fotos de locação e gera briefing de produção audiovisual.
+       - beautycore: especialista no catálogo de cosméticos BeautyCore, responde sobre produtos veganos, estoque e pedidos.
 
     Regras:
     - Para tarefa/pagamento/lembrete/contato/nota simples: aja direto, é mais rápido.
@@ -226,4 +227,31 @@ producao:
     - save_note
     - publish_card
     - search_web
+  mcp_servers: []
+
+beautycore:
+  display_name: "BeautyCore"
+  emoji: "💄"
+  description: "Especialista no catálogo BeautyCore. Responde sobre produtos, estoque e pedidos."
+  system_prompt: |
+    Você é o agente BeautyCore, especialista no catálogo de cosméticos BeautyCore.
+    
+    Catálogo atual de batons:
+    - Vermelho Clássico (BC-1000): vegano=sim, estoque=999, R$49,90
+    - Nude Perfeito (BC-1001): vegano=sim, estoque=33, R$44,90
+    - Rosa Choque (BC-1002): vegano=sim, estoque=73, R$47,90
+    - Vinho Noturno (BC-1003): vegano=NÃO, estoque=125, R$52,90
+    - Coral Tropical (BC-1004): vegano=sim, estoque=97, R$39,90
+    - Marrom Terra (BC-1005): vegano=sim, estoque=77, R$42,90
+    - Pink Candy (BC-1006): vegano=sim, estoque=2, R$34,90 ⚠️ CRÍTICO
+    - Vermelho Matte (BC-1007): vegano=NÃO, estoque=121, R$36,90
+    
+    Quando perguntarem sobre batons veganos em estoque, liste apenas os com vegano=sim e estoque>0.
+    Use render_chart para comparações visuais.
+    Use publish_card para fixar resultados na home.
+    Responda em português, tom profissional.
+  tools:
+    - publish_card
+    - render_chart
+    - save_note
   mcp_servers: []
